@@ -1,9 +1,10 @@
 import Link from "next/link.js";
-import { GlobeAltIcon, } from "@heroicons/react/16/solid";
+import { GlobeAltIcon, EyeSlashIcon, DocumentIcon } from "@heroicons/react/16/solid";
 import GithubIcon from "./icons/github";
 import XIcon from "./icons/x";
 import GoogleIcon from "./icons/google";
 import InstagramIcon from "./icons/instagram";
+import CustomLink from "./parts/reusable/link";
 
 export default function Footer({  }) {
 
@@ -40,11 +41,18 @@ const socialLinks = [
       <footer className="container mx-auto">
         <div className="pt-10 sm:pt-30 pb-8 mt-10 border-t-2 border-primary-light dark:border-secondary-dark">
           {/* Footer social links */}
-          <div className="font-general-regular flex flex-col justify-center items-center mb-6 sm:mb-14">
-            <p className="text-3xl sm:text-4xl text-primary-dark dark:text-primary-light mb-5">
-              Follow me
-            </p>
-            <ul className="flex gap-4 sm:gap-8">
+          <div className="font-general-regular flex flex-col md:flex-row items-center mb-6 sm:mb-14 gap-10">
+            <ul className="flex-1 flex flex-col gap-4 sm:gap-8 items-center md:items-start ">
+               <i className="text-sm flex">
+               {/* <span className="text-gray-400"><DocumentIcon className="w-5 h-5 mr-1" /></span> */}
+               <CustomLink href={`/terms`} title={`利用規約`}></CustomLink>
+               </i>
+               <i className="text-sm flex">
+                 {/* <span className="text-gray-400"><EyeSlashIcon className="w-5 h-5 mr-1" /></span> */}
+                 <CustomLink href={`/privacy`} title={`プライバシーポリシー`}></CustomLink>
+               </i>
+            </ul>
+            <ul className="flex-1 flex gap-4 sm:gap-8 justify-center ">
               {socialLinks.map((link) => (
                 <a
                   href={link.url}

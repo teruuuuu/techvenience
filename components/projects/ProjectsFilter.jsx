@@ -5,7 +5,7 @@ const selectOptions = [
 	'Branding',
 ];
 
-const ProjectsFilter = ({ setSelectProject }) => {
+const ProjectsFilter = ({ tagList, setSelectProject }) => {
 	return (
 		<select
 			onChange={(e) => {
@@ -28,10 +28,10 @@ const ProjectsFilter = ({ setSelectProject }) => {
             "
 		>
 			<option value={setSelectProject} className="text-sm sm:text-md">
-				All Projects
+				全て
 			</option>
 
-			{selectOptions.map((option) => (
+			{tagList.map((option) => (
 				<option className="text-normal sm:text-md" key={option}>
 					{option}
 				</option>

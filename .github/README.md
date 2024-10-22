@@ -14,7 +14,7 @@ todo管理、進捗管理、達成率管理
     tag
     date
     check
-    dificulty
+    difficulty
 
 
 
@@ -27,6 +27,7 @@ blog
   - one-liner
   - game
   - family
+  - English
 
 
   model

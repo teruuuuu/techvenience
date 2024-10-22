@@ -8,6 +8,7 @@ const ProjectsGrid = () => {
 	const {
 		projects,
 		searchProject,
+		tagList,
 		setSearchProject,
 		searchProjectsByTitle,
 		selectProject,
@@ -82,7 +83,7 @@ const ProjectsGrid = () => {
 						/>
 					</div>
 
-					<ProjectsFilter setSelectProject={setSelectProject} />
+					<ProjectsFilter tagList={tagList} setSelectProject={setSelectProject} />
 				</div>
 			</div>
 

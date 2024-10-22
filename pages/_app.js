@@ -1,5 +1,4 @@
 import "../styles/globals.css";
-import "../firebase/client.js"
 
 function MyApp({ Component, pageProps }) {
 
@@ -10,4 +9,4 @@ function MyApp({ Component, pageProps }) {
   );
 }
 
-export default MyApp;
+export default MyApp
