@@ -1,9 +1,9 @@
 import { motion } from 'framer-motion';
 import Image from 'next/image';
 import Link from 'next/link';
+import Paragraphs from "../../components/parts/text/paragraphs"
 
-
-const ProjectSingle = ({ title, genre, src }) => {
+const ProjectSingle = ({ title, genre, src, desc }) => {
 	return (
 		<motion.div
 			initial={{ opacity: 0 }}
@@ -28,12 +28,21 @@ const ProjectSingle = ({ title, genre, src }) => {
 						/>
 					</div>
 					<div className="text-center px-4 py-6">
-						<h3 className="font-general-medium text-md md:text-xl font-semibold text-ternary-dark dark:text-ternary-light mb-2">
+						<h3 className="font-general-medium text-md md:text-xl font-semibold text-ternary-dark dark:text-ternary-light mb-2 p-2">
 							{title}
 						</h3>
-						<span className="text-lg text-ternary-dark dark:text-ternary-light">
-							{genre}
-						</span>
+						<div className=" flex items-center justify-center gap-2 text-sm text-ternary-light dark:text-ternary-light mb-2 p-2">
+						  <Paragraphs text={desc} addClass='max-h-[4rem] overflow-hidden line-clamp-3'/>
+						</div>
+						<div className="flex items-center justify-center gap-2 text-sm text-ternary-light dark:text-ternary-light">
+						{genre.map((r) => {
+							return ( 
+							<span className='px-2 py-2 rounded-lg bg-indigo-500 hover:bg-indigo-600 focus:ring-1 focus:ring-indigo-900  duration-300'>
+							{r.name}
+							</span>
+							)
+						})}
+						</div>
 					</div>
 				</div>
 			</Link>

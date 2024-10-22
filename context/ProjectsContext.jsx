@@ -4,7 +4,7 @@ import { useState, createContext } from 'react';
 export const ProjectsContext = createContext();
 
 // Create the projects context provider
-export const ProjectsProvider = ({list, tags, children}) => {
+export const ProjectsProvider = ({list, tags, size, children}) => {
 	const [projects, setProjects] = useState(list);
 	const [tagList, setTagList] = useState(tags);
 	const [searchProject, setSearchProject] = useState('');

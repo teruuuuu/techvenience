@@ -4,7 +4,7 @@ import { ProjectsContext } from '../../context/ProjectsContext';
 import ProjectsFilter from './ProjectsFilter';
 import { MagnifyingGlassIcon } from '@heroicons/react/16/solid';
 
-const ProjectsGrid = () => {
+const ProjectsGrid = ({isShowMenu = true}) => {
 	const {
 		projects,
 		searchProject,
@@ -21,14 +21,14 @@ const ProjectsGrid = () => {
 	console.log(projects)
 
 	return (
-		<section className="py-5  mt-5">
-			{/* <div className="text-center">
+		<section className="py-5 mt-10">
+			<div className="text-center mb-5 sm:mb-16">
 				<p className="font-general-medium text-2xl sm:text-4xl mb-1 text-ternary-dark dark:text-ternary-light">
-					Projects portfolio
+				Post Collection
 				</p>
-			</div> */}
-
-			<div className="mt-5 sm:mt-16">
+			</div>
+			{isShowMenu && (
+			<div className="">
 				<div
 					className="
                         flex
@@ -86,32 +86,36 @@ const ProjectsGrid = () => {
 					<ProjectsFilter tagList={tagList} setSelectProject={setSelectProject} />
 				</div>
 			</div>
+			)}
 
 			<div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 mt-6 sm:gap-10">
 				{selectProject
 					? selectProjectsByCategory.map((project) => (
 							<ProjectSingle
-								title={project.name}
-								genre={project.genre}
-								src={project.src}
+								title={project.title}
+								genre={project.tags}
+								src={project.image}
 								key={project.id}
+								desc={project.description}
 							/>
 					  ))
 					: searchProject
 					? searchProjectsByTitle.map((project) => (
 							<ProjectSingle
-								title={project.name}
-								genre={project.genre}
-								src={project.src}
+								title={project.title}
+								genre={project.tags}
+								src={project.image}
 								key={project.id}
+								desc={project.description}
 							/>
 					  ))
 					: projects.map((project) => (
 							<ProjectSingle
-								title={project.name}
-								genre={project.genre}
-								src={project.src}
+								title={project.title}
+								genre={project.tags}
+								src={project.image}
 								key={project.id}
+								desc={project.description}
 							/>
 					  ))}
 			</div>

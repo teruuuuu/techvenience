@@ -2,8 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
-.aboutme {
-    font-family: 'Roboto Mono', monospace;
+body {
+    font-family: 'Roboto Mono', monospace, 'Hiragino Kaku Gothic';
 }
 
 

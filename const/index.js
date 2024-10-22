@@ -49,44 +49,12 @@ export const GENRE_LIST = [
         icon: "bi bi-cpu"
     }
 ]
-/**
- * genre title map
- */
-export const GENRE_TITLE_MAP = {
-    'ai' : 'AI 人工知能 CHAT-GPT',
-    'design' : 'CSS デザイン Bootstrap Tailwind',
-    'management' : '時間管理 タスク管理 プロジェクト管理 マネジメント',
-    'tech' : '最新技術 テクノロジー Technology イノベーション',
-}
+
 /** 広告ID */
 export const AD_CLIENT_ID = process.env.NEXT_PUBLIC_AD_CLIENT_ID
-/** 人気記事 */
-export const POPULAR_LIST = [
-    {
-        title: 'ブログも書ける！AIを使ったライティングツールまとめ',
-        url: 'https://duotaro.github.io/blog/ai/detail/8395fda2-77c3-4d23-855c-82ae6c9cf985/'
-    },
-    {
-        title: 'シンプルなタイムトラッキングで時間とコストを削減 「Toggl Track」',
-        url: 'https://duotaro.github.io/blog/management/detail/e72dfce4-ff9e-4e3e-aa30-d0d753f2a605/'
-    },
-    {
-        title: '効率的かつ迅速、安全性も備えたWebAssembly (Wasm) とは？',
-        url: 'https://duotaro.github.io/blog/tech/detail/939b6442-3356-41dd-aa80-fcc5335bbf81/'
-    },
-]
-/** おすすめ記事 */
-export const RECOMMEND_LIST = [
-    {
-        title: 'AIはあなたが使っているアプリにも使われている',
-        url: 'https://duotaro.github.io/blog/ai/detail/8395fda2-77c3-4d23-855c-82ae6c9cf985/'
-    },
-    {
-        title: 'シンプルなタイムトラッキングで時間とコストを削減 「Toggl Track」',
-        url: 'https://duotaro.github.io/blog/management/detail/e72dfce4-ff9e-4e3e-aa30-d0d753f2a605/'
-    },
-    {
-        title: '作業を簡単に自動化できるAI「AI Agent」がすごい',
-        url: 'https://duotaro.github.io/blog/ai/detail/ade7a08a-fa2b-41d0-81cc-8b112d993813/'
-    },
-]
+
+
+export const DOWNLOAD_IMAGE_PATH = 'public/images/download'
+export const ACCESABLE_IMAGE_PATH = 'images/download'
+export const DOWNLOAD_BLOG_IMAGE_PATH = 'public/images/download/blogDetail'
+export const ACCESABLE_BLOG_IMAGE_PATH = 'images/download/blogDetail'
