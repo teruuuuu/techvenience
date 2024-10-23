@@ -27,11 +27,11 @@ const ProjectSingle = ({ title, genre, src, desc }) => {
 							}}
 						/>
 					</div>
-					<div className="text-center px-4 py-6">
-						<h3 className="font-general-medium text-md md:text-xl font-semibold text-ternary-dark dark:text-ternary-light mb-2 p-2">
+					<div className="px-4 py-6">
+						<h3 className="font-general-medium text-md md:text-xl font-semibold text-ternary-dark dark:text-ternary-light mb-2 p-2 h-13 lg:h-24 xl:h-15 overflow-hidden line-clamp-2">
 							{title}
 						</h3>
-						<div className=" flex items-center justify-center gap-2 text-sm text-ternary-light dark:text-ternary-light mb-2 p-2">
+						<div className="flex  justify-center gap-2 text-sm text-ternary-light dark:text-ternary-light mb-2 p-2">
 						  <Paragraphs text={desc} addClass='max-h-[4rem] overflow-hidden line-clamp-3'/>
 						</div>
 						<div className="flex items-center justify-center gap-2 text-sm text-ternary-light dark:text-ternary-light">

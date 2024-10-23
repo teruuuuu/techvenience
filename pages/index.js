@@ -14,7 +14,7 @@ export default function Home({ posts }) {
 
 	// todo
 	let { todoList, todoTagList, blogList, blogTagList} = createList(posts)
-	console.log(blogList)
+	
 	console.log(todoList)
 
   return (
@@ -26,9 +26,9 @@ export default function Home({ posts }) {
       <div className="container mx-auto">
          <AppBanner />
 
-         <ProjectsProvider list={blogList} tags={blogTagList} size={6}>
-				   <ProjectsGrid isShowMenu={false}></ProjectsGrid>
-			   </ProjectsProvider>
+         <ProjectsProvider list={blogList} tags={blogTagList}>
+			<ProjectsGrid isShowMenu={false} size={3}></ProjectsGrid>
+		</ProjectsProvider>
 
          <div className="mt-8 sm:mt-10 flex justify-center">
             <Link
@@ -124,6 +124,12 @@ export const createList = (posts) => {
 			todoList.push(entity)
 			entity.tags.forEach(tag => todoTagList.push(tag.name));
 		}
+		blogList.sort((a, b) => {
+			return new Date(b.date.start) - new Date(a.date.start);
+		});
+		todoList.sort((a, b) => {
+			return new Date(b.date.start) - new Date(a.date.start);
+		});
 	}
 
 	return {

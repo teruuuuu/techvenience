@@ -6,6 +6,7 @@ import { ProjectsContext, ProjectsProvider } from "../../context/ProjectsContext
 import { getDatabase } from "../../lib/notion";
 import { useContext } from "react";
 import { createList } from "..";
+import saveImageIfNeeded from "../../components/download";
 
 const BlogList = ({posts}) => {
 	// ここで分割する
@@ -30,11 +31,11 @@ export default BlogList;
 
 export const getStaticProps = async () => {
 	const database = await getDatabase(process.env.NEXT_PUBLIC_NOTION_DATABASE_ID);
-	//let props = []
-	// for(let item of database){
-	//   props.push(item.properties)
-	// }
-	// saveImageIfNeeded(props, "blogList")
+	let props = []
+	for(let item of database){
+	  props.push(item.properties)
+	}
+	saveImageIfNeeded(props, "blogList")
 	return {
 	  props: {
 		posts: database

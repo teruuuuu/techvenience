@@ -4,7 +4,7 @@ import { ProjectsContext } from '../../context/ProjectsContext';
 import ProjectsFilter from './ProjectsFilter';
 import { MagnifyingGlassIcon } from '@heroicons/react/16/solid';
 
-const ProjectsGrid = ({isShowMenu = true}) => {
+const ProjectsGrid = ({isShowMenu = true, size = null}) => {
 	const {
 		projects,
 		searchProject,
@@ -16,9 +16,10 @@ const ProjectsGrid = ({isShowMenu = true}) => {
 		selectProjectsByCategory,
 	} = useContext(ProjectsContext);
 
-
-	console.log("-----console.log(projects)----")
-	console.log(projects)
+	let resList = projects
+	if(size){
+		resList = projects.slice(0, size);
+	}
 
 	return (
 		<section className="py-5 mt-10">
@@ -109,7 +110,7 @@ const ProjectsGrid = ({isShowMenu = true}) => {
 								desc={project.description}
 							/>
 					  ))
-					: projects.map((project) => (
+					: resList.map((project) => (
 							<ProjectSingle
 								title={project.title}
 								genre={project.tags}
