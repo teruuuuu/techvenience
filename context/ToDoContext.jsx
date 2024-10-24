@@ -9,6 +9,7 @@ export const TodoListProvider = ({list, tags, children}) => {
 	const [tagList, setTagList] = useState(tags);
 	const {initMonthlyTodo, initWeeklyTodo, initDaylyTodoList} = getInit(todoList)
 
+
 	// ここで今日の日付から抽出してしまう
 	const [monthlyTodo, setMonthlyTodo] = useState(initMonthlyTodo);// 今月の月間目標
 	const [weeklyTodo, setWeeklyTodo] = useState(initWeeklyTodo);// 今週の週間目標
@@ -43,16 +44,20 @@ const getInit = (todoList) => {
 	// 月間目標を取得
 	const monthlyGoals = todoList.filter(todo => {
 		const todoDate = new Date(todo.date.start);
-		return todoDate.getMonth() === currentMonth && todoDate.getFullYear() === today.getFullYear();
+		return todo.unit === 'month' && todoDate.getMonth() === currentMonth && todoDate.getFullYear() === today.getFullYear();
 	});
+	// todo.unit === "month" && 
 
 
 	// 週間目標を取得
 	const weeklyGoals = todoList.filter(todo => {
 		const todoDate = new Date(todo.date.start);
 		return (
-			todoDate >= new Date(today.setDate(currentWeekStart)) && 
-			todoDate < new Date(today.setDate(currentWeekStart + 7))
+			todo.unit === "week" && 
+			todoDate.getMonth() === currentMonth && 
+			todoDate.getFullYear() === today.getFullYear() && 
+			todoDate.toDateString() >= new Date(today.setDate(currentWeekStart)).toDateString() && 
+			todoDate.toDateString() < new Date(today.setDate(currentWeekStart + 7)).toDateString()
 		);
 	});
 

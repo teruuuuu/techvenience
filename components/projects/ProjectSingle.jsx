@@ -6,6 +6,7 @@ import Paragraphs from "../../components/parts/text/paragraphs"
 const ProjectSingle = ({ title, genre, src, desc }) => {
 	return (
 		<motion.div
+			key={title}
 			initial={{ opacity: 0 }}
 			animate={{ opacity: 1, delay: 1 }}
 			transition={{

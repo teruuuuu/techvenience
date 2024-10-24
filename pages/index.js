@@ -6,17 +6,17 @@ export const databaseId = process.env.NEXT_PUBLIC_NOTION_DATABASE_ID;
 import { ACCESABLE_IMAGE_PATH, GENRE_LIST, GENRES } from "../const/index.js";
 import AppBanner from "../components/parts/home/appBanner.js";
 import { ProjectsProvider } from "../context/ProjectsContext.jsx";
+import { TodoListProvider } from "../context/ToDoContext.jsx";
 import ProjectsGrid from "../components/projects/ProjectsGrid.jsx";
 import Button from "../components/parts/reusable/button.js";
 import saveImageIfNeeded from "../components/download/index.js";
+import TodoListGrid from "../components/todo/TodoGrid.jsx";
 
 export default function Home({ posts }) {
 
 	// todo
 	let { todoList, todoTagList, blogList, blogTagList} = createList(posts)
 	
-	console.log(todoList)
-
   return (
     <Layout>
       <Head>
@@ -26,13 +26,17 @@ export default function Home({ posts }) {
       <div className="container mx-auto">
          <AppBanner />
 
+		 <TodoListProvider list={todoList} tags={todoTagList}>
+			<TodoListGrid />
+		 </TodoListProvider>
+
          <ProjectsProvider list={blogList} tags={blogTagList}>
 			<ProjectsGrid isShowMenu={false} size={3}></ProjectsGrid>
 		</ProjectsProvider>
 
          <div className="mt-8 sm:mt-10 flex justify-center">
             <Link
-              href={`/blog/`}
+              href={`/blog`}
               className="font-general-medium flex items-center px-6 py-3 rounded-lg shadow-lg hover:shadow-xl bg-indigo-500 hover:bg-indigo-600 focus:ring-1 focus:ring-indigo-900 text-white text-lg sm:text-xl duration-300"
               aria-label="More Projects"
             >
@@ -91,11 +95,11 @@ export class BlogEntity extends BaseEntity {
 export class ToDoEntity extends BaseEntity {
 	constructor(item){
 		super(item);
-		this.start = null
-		this.end = null
-		this.check = false
-		this.difficulty = 1
-		this.unit = null
+		this.start = item.properties["date"].date.start
+		this.end = item.properties["date"].date.end
+		this.check = item.properties["check"].checkbox
+		this.difficulty = item.properties["difficulty"]
+		this.unit = item.properties["unit"].select.name
 	}
 }
 
