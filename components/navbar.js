@@ -33,13 +33,13 @@ export default function Navigation({  }) {
 						<Link href="/">
 							{activeTheme === 'dark' ? (
 								<img
-									src={`/images/logo-dark.svg`}
+									src={`/images/logo-light-new.png`}
 									className="w-36"
 									alt="Dark Logo"
 								/>
 							) : (
 								<img
-									src={`/images/logo-light.svg`}
+									src={`/images/logo-dark-new.png`}
 									className="w-36"
 									alt="Dark Logo"
 								/>
@@ -96,7 +96,7 @@ export default function Navigation({  }) {
 						className="block text-left text-lg text-primary-dark dark:text-ternary-light hover:text-secondary-dark dark:hover:text-secondary-light  sm:mx-4 mb-2 sm:py-2"
 						aria-label="Projects"
 					>
-						Blog
+						Post
 					</Link>
 					<Link
 						href="/contact"
@@ -114,7 +114,7 @@ export default function Navigation({  }) {
 						className="block text-left text-lg text-primary-dark dark:text-ternary-light hover:text-secondary-dark dark:hover:text-secondary-light  sm:mx-4 mb-2 sm:py-2"
 						aria-label="About Me"
 					>
-						Blog
+						Post
 					</Link>
 					<Link
 						href="/contact"

@@ -33,12 +33,12 @@ const ProjectSingle = ({ title, genre, src, desc }) => {
 							{title}
 						</h3>
 						<div className="flex  justify-center gap-2 text-sm text-ternary-light dark:text-ternary-light mb-2 p-2">
-						  <Paragraphs text={desc} addClass='max-h-[4rem] overflow-hidden line-clamp-3'/>
+						  <Paragraphs text={desc} addClass='max-h-[5rem] overflow-hidden line-clamp-3'/>
 						</div>
 						<div className="flex items-center justify-center gap-2 text-sm text-ternary-light dark:text-ternary-light">
 						{genre.map((r) => {
 							return ( 
-							<span className='px-2 py-2 rounded-lg bg-indigo-500 hover:bg-indigo-600 focus:ring-1 focus:ring-indigo-900  duration-300'>
+							<span className='px-2 py-2 rounded-lg bg-indigo-500 hover:bg-indigo-600 focus:ring-1 focus:ring-indigo-900  duration-300' key={r.id}>
 							{r.name}
 							</span>
 							)

@@ -11,11 +11,13 @@ import ProjectsGrid from "../components/projects/ProjectsGrid.jsx";
 import Button from "../components/parts/reusable/button.js";
 import saveImageIfNeeded from "../components/download/index.js";
 import TodoListGrid from "../components/todo/TodoGrid.jsx";
+import { OneLinerProvider } from "../context/OneLinerContext.jsx";
+import OneLinerGrid from "../components/oneLiner/OneLinerGrid.jsx";
 
 export default function Home({ posts }) {
 
 	// todo
-	let { todoList, todoTagList, blogList, blogTagList} = createList(posts)
+	let { todoList, todoTagList, blogList, blogTagList, oneLinerList, oneLinerTagList} = createList(posts)
 	
   return (
     <Layout>
@@ -26,9 +28,9 @@ export default function Home({ posts }) {
       <div className="container mx-auto">
          <AppBanner />
 
-		 <TodoListProvider list={todoList} tags={todoTagList}>
-			<TodoListGrid />
-		 </TodoListProvider>
+		 <OneLinerProvider list={oneLinerList} tags={oneLinerTagList} >
+			<OneLinerGrid />
+		 </OneLinerProvider>
 
          <ProjectsProvider list={blogList} tags={blogTagList}>
 			<ProjectsGrid isShowMenu={false} size={3}></ProjectsGrid>
@@ -42,9 +44,11 @@ export default function Home({ posts }) {
             >
               <Button title={`View All`} />
             </Link>
-          
-          
           </div>
+
+		  <TodoListProvider list={todoList} tags={todoTagList}>
+			<TodoListGrid />
+		 </TodoListProvider>
 
         
       </div>{/* .container */}
@@ -72,7 +76,6 @@ class BaseEntity {
     constructor(item) {
 		this.id = item.id
         this.title = item.properties["名前"].title[0].text.content;
-        this.description = item.properties["description"].rich_text
         this.tags = item.properties["tags"].multi_select
 		this.date = item.properties["date"].date
 		this.type = item.properties["type"].select.name
@@ -83,11 +86,13 @@ export class BlogEntity extends BaseEntity {
 	constructor(item){
 		super(item);
 
-    if(item.properties["image"].files[0]){
-      const tmpName = item.properties["image"].files[0].name
-      const fileName = tmpName.replace(/ /g, '_')
-      this.image = `/${ACCESABLE_IMAGE_PATH}/blogList/${fileName}`
-    }
+        this.description = item.properties["description"].rich_text
+
+		if(item.properties["image"].files[0]){
+		const tmpName = item.properties["image"].files[0].name
+		const fileName = tmpName.replace(/ /g, '_')
+		this.image = `/${ACCESABLE_IMAGE_PATH}/blogList/${fileName}`
+		}
 
 	}
 }
@@ -95,11 +100,27 @@ export class BlogEntity extends BaseEntity {
 export class ToDoEntity extends BaseEntity {
 	constructor(item){
 		super(item);
+
+
+		
+		this.description = item.properties["description"].rich_text
 		this.start = item.properties["date"].date.start
 		this.end = item.properties["date"].date.end
 		this.check = item.properties["check"].checkbox
 		this.difficulty = item.properties["difficulty"]
 		this.unit = item.properties["unit"].select.name
+	}
+}
+
+export class OneLinerEntity extends BaseEntity {
+	constructor(item){
+		super(item);
+
+		this.url = null
+		if(item.properties["名前"].title[0].text.link){
+			this.url = item.properties["名前"].title[0].text.link.url
+		};
+		console.log(this.url)
 	}
 }
 
@@ -111,6 +132,9 @@ export const createList = (posts) => {
 	// blog
 	let blogList = []
 	let blogTagList = []
+	// oneLiner
+	let oneLinerList = []
+	let oneLinerTagList = []
 
 	for(const post of posts){
 		let type = null
@@ -127,11 +151,18 @@ export const createList = (posts) => {
 			const entity = new ToDoEntity(post)
 			todoList.push(entity)
 			entity.tags.forEach(tag => todoTagList.push(tag.name));
+		} else if(type == "oneLiner"){
+			const entity = new OneLinerEntity(post)
+			oneLinerList.push(entity)
+			entity.tags.forEach(tag => oneLinerTagList.push(tag.name));
 		}
 		blogList.sort((a, b) => {
 			return new Date(b.date.start) - new Date(a.date.start);
 		});
 		todoList.sort((a, b) => {
+			return new Date(b.date.start) - new Date(a.date.start);
+		});
+		oneLinerList.sort((a, b) => {
 			return new Date(b.date.start) - new Date(a.date.start);
 		});
 	}
@@ -140,7 +171,9 @@ export const createList = (posts) => {
 		todoList,
 		todoTagList,
 		blogList,
-		blogTagList
+		blogTagList,
+		oneLinerList,
+		oneLinerTagList
 	}
 
 }
