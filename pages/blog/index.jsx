@@ -1,16 +1,19 @@
 import Head from "next/head";
 import Layout from "../../components/layout";
 import ProjectsGrid from "../../components/projects/ProjectsGrid";
-import { GENRE_LIST } from "../../const";
-import { ProjectsContext, ProjectsProvider } from "../../context/ProjectsContext";
+import { ProjectsProvider } from "../../context/ProjectsContext";
 import { getDatabase } from "../../lib/notion";
-import { useContext } from "react";
 import { createList } from "..";
 import saveImageIfNeeded from "../../components/download";
 
 const BlogList = ({posts}) => {
 	// ここで分割する
 	let { blogList, blogTagList} = createList(posts)
+
+	for(const blog of blogList){
+		console.log(blog.id)
+	}
+	
 
 	return (
 		<Layout>
@@ -42,5 +45,5 @@ export const getStaticProps = async () => {
 	  },
 	  revalidate: 1,
 	};
-  };
+};
   

@@ -18,9 +18,8 @@ export default function Navigation({  }) {
 		}
 	}
 
-
   return (
-<motion.nav
+		<motion.nav
 			initial={{ opacity: 0 }}
 			animate={{ opacity: 1 }}
 			id="nav"
@@ -33,13 +32,13 @@ export default function Navigation({  }) {
 						<Link href="/">
 							{activeTheme === 'dark' ? (
 								<img
-									src={`/images/logo-light-new.png`}
+									src={`/images/logo-dark-new.png`}
 									className="w-36"
 									alt="Dark Logo"
 								/>
 							) : (
 								<img
-									src={`/images/logo-dark-new.png`}
+									src={`/images/logo-light-new.png`}
 									className="w-36"
 									alt="Dark Logo"
 								/>

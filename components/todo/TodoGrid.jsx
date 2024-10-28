@@ -61,12 +61,12 @@ const TodoListGrid = ({isShowMenu = true, size = null}) => {
 				</div>
 
 				<div>
-					{activeTab == "month" && (
+					{activeTab == "month" && monthlyTodo && (
 						<div className="p-4 rounded-lg" id="month" role="tabpanel">
 						  <ToDoParagraphs item={monthlyTodo.description} checked={monthlyTodo.check} />
 						</div>
 					)}
-					{activeTab == "week" && (
+					{activeTab == "week" && weeklyTodo && (
 						<div className="p-4 rounded-lg " id="month" role="tabpanel">
 						  <ToDoParagraphs item={weeklyTodo.description} checked={weeklyTodo.check} />
 						</div>
@@ -164,7 +164,6 @@ export function ArrayParagraphs({ item, checked = false }) {
   if (!item) {
     return null;
   }
-  console.log(item)
   return item.map((value) => {
     const {
       annotations: { bold, code, color, italic, strikethrough, underline },

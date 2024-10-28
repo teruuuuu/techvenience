@@ -21,6 +21,12 @@ const ProjectsGrid = ({isShowMenu = true, size = null}) => {
 		resList = projects.slice(0, size);
 	}
 
+
+	console.log("---------")
+	console.log(resList)
+	console.log("--------sqwdqwdqw-")
+
+
 	return (
 		<section className="py-5 mt-10">
 			<div className="text-center mb-5 sm:mb-16">
@@ -93,6 +99,7 @@ const ProjectsGrid = ({isShowMenu = true, size = null}) => {
 				{selectProject
 					? selectProjectsByCategory.map((project) => (
 							<ProjectSingle
+							    id={project.id}
 								title={project.title}
 								genre={project.tags}
 								src={project.image}
@@ -103,6 +110,7 @@ const ProjectsGrid = ({isShowMenu = true, size = null}) => {
 					: searchProject
 					? searchProjectsByTitle.map((project) => (
 							<ProjectSingle
+								id={project.id}
 								title={project.title}
 								genre={project.tags}
 								src={project.image}
@@ -112,6 +120,7 @@ const ProjectsGrid = ({isShowMenu = true, size = null}) => {
 					  ))
 					: resList.map((project) => (
 							<ProjectSingle
+								id={project.id}
 								title={project.title}
 								genre={project.tags}
 								src={project.image}

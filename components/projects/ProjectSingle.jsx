@@ -3,10 +3,10 @@ import Image from 'next/image';
 import Link from 'next/link';
 import Paragraphs from "../../components/parts/text/paragraphs"
 
-const ProjectSingle = ({ title, genre, src, desc }) => {
+const ProjectSingle = ({ id, title, genre, src, desc }) => {
 	return (
 		<motion.div
-			key={title}
+			key={id}
 			initial={{ opacity: 0 }}
 			animate={{ opacity: 1, delay: 1 }}
 			transition={{
@@ -15,7 +15,7 @@ const ProjectSingle = ({ title, genre, src, desc }) => {
 				delay: 0.15,
 			}}
 		>
-			<Link href="/projects/detail/" aria-label="Single Project">
+			<Link href={`/blog/detail/${id}`} aria-label="Single Project">
 				<div className="rounded-xl shadow-lg hover:shadow-xl cursor-pointer mb-10 sm:mb-0 bg-secondary-light dark:bg-ternary-dark">
 					<div className='relative h-[200px]'>
 						<Image

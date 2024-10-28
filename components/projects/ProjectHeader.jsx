@@ -3,7 +3,7 @@ import SingleProjectContext from '../../context/SingleProjectContext';
 import { ClockIcon, TagIcon } from '@heroicons/react/16/solid';
 
 const ProjectSingleHeader = () => {
-	const { singleProjectData } = useContext(SingleProjectContext);
+	const { pageData, blocksData } = useContext(SingleProjectContext);
 
 	return (
 		<div>

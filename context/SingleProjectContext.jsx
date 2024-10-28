@@ -2,12 +2,13 @@ import { useState, createContext } from 'react';
 
 const SingleProjectContext = createContext();
 
-export const SingleProjectProvider = ({ project, children }) => {
-	const [singleProjectData, setSingleProjectData] = useState(project);
+export const SingleProjectProvider = ({ page, blocks, children }) => {
+	const [pageData, setPageData] = useState(page);
+	const [blocksData, setBlocksData] = useState(blocks);
 
 	return (
 		<SingleProjectContext.Provider
-			value={{ singleProjectData, setSingleProjectData }}
+			value={{ pageData, setPageData, blocksData, setBlocksData }}
 		>
 			{children}
 		</SingleProjectContext.Provider>

@@ -39,7 +39,16 @@ export const TodoListProvider = ({list, tags, children}) => {
 const getInit = (todoList) => {
 	const today = new Date();
 	const currentMonth = today.getMonth();
-	const currentWeekStart = today.getDate() - today.getDay(); // 日曜日を週の始まりとする
+	const currentWeekStart = new Date();
+	
+	// 日曜日を週の始まりとする
+	currentWeekStart.setDate(today.getDate() - today.getDay());
+	currentWeekStart.setHours(0, 0, 0, 0);
+
+	const currentWeekEnd = new Date(currentWeekStart);
+	currentWeekEnd.setDate(currentWeekStart.getDate() + 7);
+
+
 
 	// 月間目標を取得
 	const monthlyGoals = todoList.filter(todo => {
@@ -52,12 +61,17 @@ const getInit = (todoList) => {
 	// 週間目標を取得
 	const weeklyGoals = todoList.filter(todo => {
 		const todoDate = new Date(todo.date.start);
+		
+		if(todo.unit === "week"){
+			console.log("todo week")
+			console.log(currentWeekStart)
+			console.log(todoDate)
+			console.log(currentWeekEnd)
+		}
 		return (
 			todo.unit === "week" && 
-			todoDate.getMonth() === currentMonth && 
-			todoDate.getFullYear() === today.getFullYear() && 
-			todoDate.toDateString() >= new Date(today.setDate(currentWeekStart)).toDateString() && 
-			todoDate.toDateString() < new Date(today.setDate(currentWeekStart + 7)).toDateString()
+			todoDate >= currentWeekStart && 
+			todoDate < currentWeekEnd
 		);
 	});
 

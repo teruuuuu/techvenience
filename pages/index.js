@@ -87,13 +87,11 @@ export class BlogEntity extends BaseEntity {
 		super(item);
 
         this.description = item.properties["description"].rich_text
-
 		if(item.properties["image"].files[0]){
-		const tmpName = item.properties["image"].files[0].name
-		const fileName = tmpName.replace(/ /g, '_')
-		this.image = `/${ACCESABLE_IMAGE_PATH}/blogList/${fileName}`
+			const tmpName = item.properties["image"].files[0].name
+			const fileName = tmpName.replace(/ /g, '_')
+			this.image = `/${ACCESABLE_IMAGE_PATH}/blogList/${fileName}`
 		}
-
 	}
 }
 
@@ -101,8 +99,6 @@ export class ToDoEntity extends BaseEntity {
 	constructor(item){
 		super(item);
 
-
-		
 		this.description = item.properties["description"].rich_text
 		this.start = item.properties["date"].date.start
 		this.end = item.properties["date"].date.end
@@ -120,7 +116,6 @@ export class OneLinerEntity extends BaseEntity {
 		if(item.properties["名前"].title[0].text.link){
 			this.url = item.properties["名前"].title[0].text.link.url
 		};
-		console.log(this.url)
 	}
 }
 
