@@ -13,7 +13,8 @@ import saveImageIfNeeded from "../components/download/index.js";
 import TodoListGrid from "../components/todo/TodoGrid.jsx";
 import { OneLinerProvider } from "../context/OneLinerContext.jsx";
 import OneLinerGrid from "../components/oneLiner/OneLinerGrid.jsx";
-
+import ChartPage from "../components/parts/chart/BarChart.jsx"
+import TodoChart from "../components/todo/ToDoChart.jsx";
 export default function Home({ posts }) {
 
 	// todo
@@ -27,10 +28,6 @@ export default function Home({ posts }) {
       </Head>
       <div className="container mx-auto">
          <AppBanner />
-
-		 <OneLinerProvider list={oneLinerList} tags={oneLinerTagList} >
-			<OneLinerGrid />
-		 </OneLinerProvider>
 
          <ProjectsProvider list={blogList} tags={blogTagList}>
 			<ProjectsGrid isShowMenu={false} size={3}></ProjectsGrid>
@@ -46,9 +43,18 @@ export default function Home({ posts }) {
             </Link>
           </div>
 
+		<hr className="m-10 border"></hr>
+
+		 <OneLinerProvider list={oneLinerList} tags={oneLinerTagList} >
+			<OneLinerGrid />
+		 </OneLinerProvider>
+
 		  <TodoListProvider list={todoList} tags={todoTagList}>
 			<TodoListGrid />
+			<TodoChart />
 		 </TodoListProvider>
+
+
 
         
       </div>{/* .container */}
@@ -75,6 +81,22 @@ export const getStaticProps = async () => {
 class BaseEntity {
     constructor(item) {
 		this.id = item.id
+		this.createdAt = new Date(item.created_time).toLocaleString(
+            "ja",
+            {
+              month: "short",
+              day: "2-digit",
+              year: "numeric",
+            }
+        );
+		this.updatedAt = new Date(item.last_edited_time).toLocaleString(
+            "ja",
+            {
+              month: "short",
+              day: "2-digit",
+              year: "numeric",
+            }
+        );
         this.title = item.properties["名前"].title[0].text.content;
         this.tags = item.properties["tags"].multi_select
 		this.date = item.properties["date"].date
@@ -103,7 +125,7 @@ export class ToDoEntity extends BaseEntity {
 		this.start = item.properties["date"].date.start
 		this.end = item.properties["date"].date.end
 		this.check = item.properties["check"].checkbox
-		this.difficulty = item.properties["difficulty"]
+		this.difficulty = item.properties["difficulty"].select.name
 		this.unit = item.properties["unit"].select.name
 	}
 }

@@ -3,28 +3,37 @@ import SingleProjectContext from '../../context/SingleProjectContext';
 import { ClockIcon, TagIcon } from '@heroicons/react/16/solid';
 
 const ProjectSingleHeader = () => {
-	const { pageData, blocksData } = useContext(SingleProjectContext);
+	const { pageData } = useContext(SingleProjectContext);
 
 	return (
-		<div>
+		<header>
 			<p className="font-general-medium text-left text-3xl sm:text-4xl font-bold text-primary-dark dark:text-primary-light mt-14 sm:mt-20 mb-7">
-				{singleProjectData.ProjectHeader.title}
+				{pageData.title}
 			</p>
 			<div className="flex">
 				<div className="flex items-center mr-10">
 					<ClockIcon className="text-lg text-ternary-dark dark:text-ternary-light w-5 h-5" />
 					<span className="font-general-regular ml-2 leading-none text-primary-dark dark:text-primary-light">
-						{singleProjectData.ProjectHeader.publishDate}
+						{pageData.createdAt}
 					</span>
 				</div>
 				<div className="flex items-center">
 					<TagIcon className="text-lg text-ternary-dark dark:text-ternary-light w-5 h-5" />
-					<span className="font-general-regular ml-2 leading-none text-primary-dark dark:text-primary-light">
-						{singleProjectData.ProjectHeader.tags}
+					<span className="font-general-regular ml-2 leading-none text-primary-dark dark:text-primary-light items-center">
+						{pageData.tags.map((tag, index) => {
+                              return (
+                                <>
+                                {index != 0 && (
+                                  <> / </>
+                                )}
+                                {tag.name}
+                                </>
+                              )
+                            })}
 					</span>
 				</div>
 			</div>
-		</div>
+		</header>
 	);
 };
 

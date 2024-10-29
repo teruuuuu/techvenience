@@ -2,14 +2,11 @@ import fs from 'fs'
 import { DOWNLOAD_BLOG_IMAGE_PATH, DOWNLOAD_IMAGE_EXTENSION } from '../../const'
 
 export const downloadImagePath = DOWNLOAD_BLOG_IMAGE_PATH
-export const downloadImageExtention = DOWNLOAD_IMAGE_EXTENSION
 
 const savBlogImageIfNeeded = async (blocks, parentPageId) => {
   const tmpPath = `${downloadImagePath}/${parentPageId}`
   const tmpBlocks = blocks
   
-  // try { fs.rmSync(tmpPath, { recursive: true, force: true }); }
-  // catch(err) { console.error(err)}
   if (!fs.existsSync(DOWNLOAD_BLOG_IMAGE_PATH)) {
     fs.mkdirSync(DOWNLOAD_BLOG_IMAGE_PATH)
   }
@@ -77,21 +74,15 @@ const getTemporaryImage = async (url) => {
 }
 
 const isImageExist = (path, keyName) => {
-  return fs.existsSync(path + '/' + keyName + downloadImageExtention)
+  return fs.existsSync(path + '/' + keyName)
 }
 
 const saveImage = (imageBinary, path, keyName) => {
-  // fs.writeFile(path + '/' + keyName + downloadImageExtention, imageBinary, (error) => {
-  //   if (error) {
-  //     console.log('error during saveImage')
-  //     console.log(error)
-  //     throw error
-  //   }
-  // })
+
   const maxRetries = 3
   const saveWithRetry = (attempt) => {
     
-    fs.writeFile(path + '/' + keyName + downloadImageExtention, imageBinary, (error) => {
+    fs.writeFile(path + '/' + keyName, imageBinary, (error) => {
       if (error) {
         if (attempt < maxRetries) {
           console.log(`Error during saveImage, attempt ${attempt + 1} of ${maxRetries}. Retrying in ${retryDelay}ms...`);

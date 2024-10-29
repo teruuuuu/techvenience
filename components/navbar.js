@@ -32,14 +32,14 @@ export default function Navigation({  }) {
 						<Link href="/">
 							{activeTheme === 'dark' ? (
 								<img
-									src={`/images/logo-dark-new.png`}
-									className="w-36"
+									src={`/images/logo-light-new.png`}
+									className="w-48"
 									alt="Dark Logo"
 								/>
 							) : (
 								<img
-									src={`/images/logo-light-new.png`}
-									className="w-36"
+									src={`/images/logo-dark-new.png`}
+									className="w-48"
 									alt="Dark Logo"
 								/>
 							)}
@@ -91,37 +91,51 @@ export default function Navigation({  }) {
 					}
 				>
 					<Link
+						href="/"
+						className="block text-left text-lg text-primary-dark dark:text-ternary-light hover:text-secondary-dark dark:hover:text-secondary-light  sm:mx-4 mb-2 sm:py-2"
+						aria-label="Home"
+					>
+						Home
+					</Link>
+					<Link
 						href="/blog"
 						className="block text-left text-lg text-primary-dark dark:text-ternary-light hover:text-secondary-dark dark:hover:text-secondary-light  sm:mx-4 mb-2 sm:py-2"
-						aria-label="Projects"
+						aria-label="Post"
 					>
 						Post
 					</Link>
-					<Link
+					{/* <Link
 						href="/contact"
 						className="block text-left text-lg text-primary-dark dark:text-ternary-light hover:text-secondary-dark dark:hover:text-secondary-light  sm:mx-4 mb-2 sm:py-2 border-t-2 pt-3 sm:pt-2 sm:border-t-0 border-primary-light dark:border-secondary-dark"
 						aria-label="Contact"
 					>
 						Contact
-					</Link>
+					</Link> */}
 				</div>
 
 				{/* Header links large screen */}
 				<div className="font-general-medium hidden m-0 sm:ml-4 mt-5 sm:mt-3 sm:flex p-5 sm:p-0 justify-center items-center shadow-lg sm:shadow-none">
 					<Link
+						href="/"
+						className="block text-left text-lg text-primary-dark dark:text-ternary-light hover:text-secondary-dark dark:hover:text-secondary-light  sm:mx-4 mb-2 sm:py-2"
+						aria-label="Home"
+					>
+						Home
+					</Link>
+					<Link
 						href="/blog"
 						className="block text-left text-lg text-primary-dark dark:text-ternary-light hover:text-secondary-dark dark:hover:text-secondary-light  sm:mx-4 mb-2 sm:py-2"
-						aria-label="About Me"
+						aria-label="Post"
 					>
 						Post
 					</Link>
-					<Link
+					{/* <Link
 						href="/contact"
 						className="block text-left text-lg text-primary-dark dark:text-ternary-light hover:text-secondary-dark dark:hover:text-secondary-light  sm:mx-4 mb-2 sm:py-2"
 						aria-label="Contact"
 					>
 						Contact
-					</Link>
+					</Link> */}
 				</div>
 
 				{/* Header right section buttons */}

@@ -7,15 +7,18 @@ import { motion } from 'framer-motion';
 import { singleProjectData as singleProjectDataJson } from '../../../data/singleProjectData';
 import Layout from "../../../components/layout";
 import { getBlocks, getDatabase, getPage } from '../../../lib/notion';
+import { BlogEntity } from "../../index"
+import savBlogImageIfNeeded from "../../../components/download/blogDetail"
 
 const ProjectSingle = ({page, blocks}) => {
     
 	// create page entity not blocks
+	const entiry = new BlogEntity(page)
 
 
 	return (
 		<Layout>
-			<motion.div
+			<motion.article
 				initial={{ opacity: 0 }}
 				animate={{ opacity: 1, delay: 1 }}
 				transition={{
@@ -25,13 +28,13 @@ const ProjectSingle = ({page, blocks}) => {
 				}}
 				className="container mx-auto mt-5 sm:mt-10"
 			>
-				<SingleProjectProvider page={page} blocks={blocks}>
+				<SingleProjectProvider page={entiry} blocks={blocks}>
 					<ProjectHeader />
 					<ProjectGallery />
 					<ProjectInfo />
-					<ProjectRelatedProjects />
+					{/* <ProjectRelatedProjects /> */}
 				</SingleProjectProvider>
-			</motion.div>
+			</motion.article>
 		</Layout>
 	);
 };
@@ -52,9 +55,6 @@ export const getStaticPaths = async () => {
         resList.push({params: res})
     }
 
-	console.log("getStaticPaths")
-	console.log(resList)
-
    return {
         paths: resList,
         fallback: false,
@@ -66,9 +66,8 @@ export const getStaticProps = async (context) => {
 	const detailPage = await getPage(id);
     const detailBlocks = await getBlocks(id)
 
-	console.log("getStaticProps")
-	console.log(detailPage)
-	console.log(detailBlock)
+	savBlogImageIfNeeded(detailBlocks, id)
+
 	return {
 	  props: {
 		page: detailPage,
